@@ -1,10 +1,9 @@
 package org.task;
 
 import org.task.customer.Customer;
-import org.task.product.Biscuits;
-import org.task.product.Cheese;
+import org.task.product.Food;
 import org.task.product.MobileScratchCard;
-import org.task.product.TV;
+import org.task.product.ElectricalDevice;
 import org.task.service.CheckOutService;
 import org.task.service.ShippingService;
 
@@ -18,7 +17,7 @@ public class Main {
         // Test 1: Successful checkout
         try {
             System.out.println("Running Test 1: Successful checkout");
-            Cheese cheese = new Cheese("Cheese", 100.0, 5, 0.2, LocalDate.of(2025, 7, 30));
+            Food cheese = new Food("Cheese", 100.0, 5, 0.2, LocalDate.of(2025, 7, 30));
             Customer customer = new Customer("Anas", 1000.0);
             customer.getCart().add(cheese, 2);
             checkout.processCheckout(customer, aramex);
@@ -30,7 +29,7 @@ public class Main {
         // Test 2: Quantity exceeds stock
         try {
             System.out.println("Running Test 2: Quantity exceeds stock");
-            Cheese cheese = new Cheese("Cheese", 100.0, 3, 0.2, LocalDate.of(2025, 7, 30));
+            Food cheese = new Food("Cheese", 100.0, 3, 0.2, LocalDate.of(2025, 7, 30));
             Customer customer = new Customer("Anas", 1000.0);
             customer.getCart().add(cheese, 5); // more than available
             checkout.processCheckout(customer, aramex);
@@ -42,7 +41,7 @@ public class Main {
         // Test 3: Product is expired
         try {
             System.out.println("Running Test 3: Expired product");
-            Biscuits biscuits = new Biscuits("Biscuits", 50.0, 5, 0.5, LocalDate.of(2023, 1, 1));
+            Food biscuits = new Food("Biscuits Bimbo", 50.0, 5, 0.5, LocalDate.of(2023, 1, 1));
             Customer customer = new Customer("Anas", 1000.0);
             customer.getCart().add(biscuits, 1);
             checkout.processCheckout(customer, aramex);
@@ -54,9 +53,9 @@ public class Main {
         // Test 4: Insufficient balance
         try {
             System.out.println("Running Test 4: Insufficient balance");
-            TV tv = new TV("TV", 3000.0, 5, 10.0);
+            ElectricalDevice electricalDevice = new ElectricalDevice("TV", 3000.0, 5, 10.0);
             Customer customer = new Customer("Anas", 100.0); // too low
-            customer.getCart().add(tv, 1);
+            customer.getCart().add(electricalDevice, 1);
             checkout.processCheckout(customer, aramex);
             System.out.println("Test 4 failed (should have thrown error)\n");
         } catch (Exception e) {
@@ -76,10 +75,10 @@ public class Main {
         // Test 6: Only shippable items
         try {
             System.out.println("Running Test 6: Only shippable items");
-            TV tv = new TV("TV", 500.0, 2, 5.0);
-            Cheese cheese = new Cheese("Cheese", 50.0, 5, 0.3, LocalDate.of(2025, 8, 1));
+            ElectricalDevice electricalDevice = new ElectricalDevice("TV", 500.0, 2, 5.0);
+            Food cheese = new Food("Cheese", 50.0, 5, 0.3, LocalDate.of(2025, 8, 1));
             Customer customer = new Customer("Anas", 2000.0);
-            customer.getCart().add(tv, 1);
+            customer.getCart().add(electricalDevice, 1);
             customer.getCart().add(cheese, 2);
             checkout.processCheckout(customer, aramex);
             System.out.println("Test 6 passed\n");
@@ -103,16 +102,16 @@ public class Main {
         try {
             System.out.println("Running Test 8: Mixed items (all types) — successful checkout");
 
-            Cheese cheese = new Cheese("Cheese", 100.0, 5, 0.2, LocalDate.of(2025, 8, 1)); // Shippable + Expirable
-            Biscuits biscuits = new Biscuits("Biscuits", 150.0, 3, 0.7, LocalDate.of(2025, 9, 1)); // Shippable + Expirable
-            TV tv = new TV("Samsung TV", 3000.0, 2, 10.0); // Shippable only
+            Food cheese = new Food("Cheese", 100.0, 5, 0.2, LocalDate.of(2025, 8, 1)); // Shippable + Expirable
+            Food biscuits = new Food("Biscuits Bimbo", 150.0, 3, 0.7, LocalDate.of(2025, 9, 1)); // Shippable + Expirable
+            ElectricalDevice electricalDevice = new ElectricalDevice("Samsung TV", 3000.0, 2, 10.0); // Shippable only
             MobileScratchCard card = new MobileScratchCard("Vodafone Card", 30.0, 10); // Non-shippable
 
             Customer customer = new Customer("Anas", 10000.0); // Sufficient balance
 
             customer.getCart().add(cheese, 2);
             customer.getCart().add(biscuits, 1);
-            customer.getCart().add(tv, 1);
+            customer.getCart().add(electricalDevice, 1);
             customer.getCart().add(card, 5);
 
             checkout.processCheckout(customer, aramex);

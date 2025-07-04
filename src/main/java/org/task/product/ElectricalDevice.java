@@ -1,9 +1,9 @@
 package org.task.product;
 
-public class TV extends Product implements Shippable {
+public class ElectricalDevice extends Product implements Shippable {
     private final double weight;
 
-    public TV(String name, double price, int quantity, double weight) {
+    public ElectricalDevice(String name, double price, int quantity, double weight) {
         super(name, price, quantity);
         this.weight = weight;
     }
