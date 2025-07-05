@@ -7,6 +7,6 @@
 
 # Assumptions
 
-- **Products** are concrete instances of classes ( Categories like Food and Electrcial Devices ), as this is a simulation for the customer side only.
+- **Products** are concrete instances of classes ( Categories like Food and Electrcial Devices ), as this is a simulation for the customer side only and not the func. of adding new product categories.
 - **Shipping Service** has its own attribute (**Cost per Kg**) which is used for calculation.
 - **Validations** (checking expiry and quantity) occur both at the Cart and Checkout stages to ensure mistakes are caught early and to provide fast feedback for customers from the cart info page.
